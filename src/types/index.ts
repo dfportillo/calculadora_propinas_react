@@ -3,3 +3,8 @@ export type MenuItems = {
     name:string;
     price:number
 };
+
+
+export type OrderItem = MenuItems &{
+    quantity:number;
+};
