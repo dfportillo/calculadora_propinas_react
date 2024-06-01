@@ -22,8 +22,13 @@ export default function useOrders (){
 
     };
 
+    const removeItem = (id:MenuItems['id']) =>{ // lookUp para dar type a id
+        setOrder(order.filter(itemRemove => itemRemove.id != id))
+    }
+
     return{
         order,
-        addItem
+        addItem,
+        removeItem
     };
 };
