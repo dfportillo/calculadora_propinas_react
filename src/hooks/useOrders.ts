@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState,useMemo } from "react";
 import { MenuItems,OrderItem } from "../types";
 
 
 
 export default function useOrders (){
     const[order,setOrder] = useState<OrderItem[]>([]);
+    const[tip,setTip] = useState(0);
 
     const addItem = (item:MenuItems) => {
 
@@ -26,9 +27,16 @@ export default function useOrders (){
         setOrder(order.filter(itemRemove => itemRemove.id != id))
     }
 
+    const subTotalAmunt = useMemo(() => order.reduce((total,item) => total+(item.price*item.quantity),0),[order]);
+
+
+
     return{
         order,
         addItem,
-        removeItem
+        removeItem,
+        subTotalAmunt,
+        tip,
+        setTip
     };
 };

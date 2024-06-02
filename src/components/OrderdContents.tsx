@@ -1,16 +1,15 @@
 import { formatCuerrency } from "../helpers";
-import { MenuItems, OrderItem } from "../types";
+import { MenuItems,OrderProps } from "../types";
 
-type OrderContentsProps = {
-    order:OrderItem[];
+type OrderContentsProps = OrderProps & {
     removeItem:(id:MenuItems['id']) => void;
 };
 
 export default function OrderContents({order,removeItem}:OrderContentsProps) {
     return (
-        <div>
+        <>
             <h1 className=" font-black text-4xl">Consumo</h1>
-            <div className=" mt-4 space-y-3">
+            <div className=" mt-4">
                 { order.length === 0 ? 
                     <p className=" text-center text-sm"> la orden esta vacia </p>                
                 :(
@@ -34,6 +33,6 @@ export default function OrderContents({order,removeItem}:OrderContentsProps) {
                     ))
                 )}
             </div>
-        </div>
+        </>
     )
 }

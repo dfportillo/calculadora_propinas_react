@@ -8,3 +8,7 @@ export type MenuItems = {
 export type OrderItem = MenuItems &{
     quantity:number;
 };
+
+export type OrderProps = {
+    order:OrderItem[]
+};
