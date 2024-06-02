@@ -1,4 +1,4 @@
-import { useState,useMemo } from "react";
+import { useState,useMemo} from "react";
 import { MenuItems,OrderItem } from "../types";
 
 
@@ -27,16 +27,27 @@ export default function useOrders (){
         setOrder(order.filter(itemRemove => itemRemove.id != id))
     }
 
-    const subTotalAmunt = useMemo(() => order.reduce((total,item) => total+(item.price*item.quantity),0),[order]);
+    const subTotalAmount = useMemo(() => order.reduce((total,item) => total+(item.price*item.quantity),0),[order]);
 
+    const propina = useMemo(() => subTotalAmount*tip , [tip,order] ) ;
+
+    const total = useMemo(() => subTotalAmount + propina ,[order,tip]) ;
+
+    const placeOrder = () =>{
+        setOrder([]);
+        setTip(0);
+    };
 
 
     return{
         order,
+        tip,
         addItem,
         removeItem,
-        subTotalAmunt,
-        tip,
-        setTip
+        setTip,
+        subTotalAmount,
+        propina,
+        total,
+        placeOrder
     };
 };
